@@ -1,0 +1,33 @@
+---
+- name: Refresh apt cache
+  apt:
+    update_cache: true
+    cache_valid_time: 3600
+  when: ansible_facts['os_family'] == 'Debian'
+
+- name: Refresh yum/dnf cache
+  yum:
+    update_cache: true
+  when: ansible_facts['os_family'] == 'RedHat'
+
+- name: Perform full upgrade on Debian hosts
+  apt:
+    upgrade: dist
+  when: ansible_facts['os_family'] == 'Debian'
+
+- name: Upgrade all packages on RedHat hosts
+  yum:
+    name: "*"
+    state: latest
+    skip_broken: true
+  when: ansible_facts['os_family'] == 'RedHat'
+
+- name: Autoremove unused packages on Debian hosts
+  apt:
+    autoremove: true
+  when: ansible_facts['os_family'] == 'Debian'
+
+- name: Autoremove unused packages on RedHat hosts
+  yum:
+    autoremove: true
+  when: ansible_facts['os_family'] == 'RedHat'

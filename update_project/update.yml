@@ -1,0 +1,8 @@
+---
+- name: Update all managed servers
+  hosts: all
+  become: false
+  gather_facts: true
+
+  roles:
+    - system_update

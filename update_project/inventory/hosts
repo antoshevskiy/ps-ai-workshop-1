@@ -1,0 +1,2 @@
+[all]
+update_target ansible_host=10.216.156.16 ansible_user=root ansible_password=password123 ansible_become=false
