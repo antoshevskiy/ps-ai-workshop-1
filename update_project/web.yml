@@ -1,0 +1,8 @@
+---
+- name: Provision nginx landing page
+  hosts: all
+  become: false
+  gather_facts: true
+
+  roles:
+    - site_nginx
